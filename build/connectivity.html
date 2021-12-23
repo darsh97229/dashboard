@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Bangle.js Health streaming</title>
+  <title>Bangle.js Connection Status</title>
  </head>
  <body> 
 <script src="https://www.puck-js.com/puck.js"></script>
-<button id="btnConnect">Connect to Watch</button>
+<p> Connection Status: <span id="conn"></span></p>
 <p> Temperature (Celsius): <span id="temp"></span></p>
-<p> conn: <span id="chk"></span></p>
 <script>
 
 var TEMP_CODE = `
@@ -34,22 +33,19 @@ var TEMP_CODE = `
   \n
 `;
 
-var connection;
-document.getElementById("btnConnect").addEventListener("click", function() {
-  if (connection) {
-    connection.close();
-    connection = undefined;
-  }
+document.getElementById("temp").innerHTML = localStorage.getItem("globaltemp");
 
-  
+var connection;
+
+if (connection) {
+  document.getElementById("conn").innerHTML = "True";
+}
+else{
+  document.getElementById("conn").innerHTML = "False";
+}
 
   Puck.connect(function(c) {
-    if (!c) {
-      alert("Couldn't connect!");
-      return;
-    }
     connection = c;
-    document.getElementById("chk").innerHTML = (connection);
     var buf = "";
     connection.on("data", function(d) {
     buf += d;
@@ -60,14 +56,13 @@ document.getElementById("btnConnect").addEventListener("click", function() {
 
     connection.write("reset();\n", function() {
       const d = new Date();
-      setTimeout(function() { connection.write(TEMP_CODE);}, 1000);
+      setTimeout(function() { connection.write(TEMP_CODE);}, 10000);
     });
   });
-});
+
 
 function onLine(line) {
-  document.getElementById("temp").innerHTML = parseInt(line).toFixed(1);
-  localStorage.setItem("globaltemp", parseInt(line).toFixed(1));
+  //document.getElementById("temp").innerHTML = parseInt(line).toFixed(1);
 }
 
 </script>
