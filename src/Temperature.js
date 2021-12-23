@@ -3,7 +3,7 @@ import Title from './Title';
 
 function iframe() {
   return {
-      __html: '<iframe src="./temperature.html" width="200" height="100"></iframe>'
+      __html: '<iframe src="./temperature.html" width="250" height="100"></iframe>'
   }
 }
 
