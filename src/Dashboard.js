@@ -31,7 +31,7 @@ import Temperature from './Temperature';
 function Credit(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Smart Watch Team - Darsh Patel: '}
+      {'Smart Watch Team - Created By: Darsh Patel - '}
       <Link color="inherit" href="https://docs.google.com/document/d/1FKQpMdW6fVEmuBzlWGJfrMCSgnWrWXQegsu7Lqy14kw/edit?usp=sharing">
         Team Documentation
       </Link>{' '}
