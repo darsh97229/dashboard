@@ -10,12 +10,27 @@
 <script>
 // Code to upload to Bangle.js
 var TEMP_CODE = `
-Bangle.on(function(a) {
-    var d = [
-    a.getTemperature(),
-    ];
-    Bluetooth.println(d.join(","));
-});\n
+  function onTimer() {
+    // Get the temperature as a string
+    var t = E.getTemperature().toFixed(1);
+    // Clear display
+    g.clear();
+    // Use the small font for a title
+    g.setFontBitmap();
+    g.drawString("Temperature:");
+    // Use a large font for the value itself
+    g.setFontVector(40);
+    g.drawString(t, (g.getWidth()-g.stringWidth(t))/2,10);
+    // Update the screen
+    g.flip();
+    Bluetooth.println(t);
+  }
+
+  // Update temperature every 2 seconds
+  setInterval(onTimer,1000);
+  // Update temperature immediately
+  onTimer();
+  \n
 `;
 
 // When we click the connect button...
@@ -71,15 +86,8 @@ document.getElementById("btnConnect").addEventListener("click", function() {
 function onLine(line) {
 //   console.log("RECEIVED:"+line);
   var d = line.split(",");
-  // console.log(d);
-if (d[0] == "Bangle.beep(200"){
-  recievetime = date.getTime();
-}
-
   if (d.length == 1){
-
-    document.getElementById("temp").innerHTML = parseInt(d[0]);
-    
+    document.getElementById("temp").innerHTML = parseInt(d[0]).toFixed(1);
   }
 }
 

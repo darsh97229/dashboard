@@ -35,6 +35,7 @@ class GPS extends Component {
       </React.Fragment>
     );
   }
+  
   componentDidMount() {
     setInterval(() => {
       this.setState({time: Date.now()})    

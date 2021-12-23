@@ -27,6 +27,7 @@ import Accelerometer from './Accelerometer';
 import Health from './Health';
 import Location from './Location';
 import Temperature from './Temperature';
+import Connection from './Connectivity';
 
 function Credit(props) {
   return (
@@ -214,9 +215,14 @@ function DashboardContent() {
                   <Health />
                 </Paper>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6} lg={6}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Temperature />
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={6} lg={6}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Connection />
                 </Paper>
               </Grid>
               <Grid item xs={12}>
