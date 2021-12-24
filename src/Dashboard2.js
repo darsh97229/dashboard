@@ -31,6 +31,7 @@ import Connection from './Connectivity';
 import Tester from './Tester';
 import Battery from './Battery';
 
+
 function Credit(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -106,7 +107,7 @@ function DashboardContent() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              pr: '24px',
             }}
           >
             <IconButton
@@ -210,39 +211,19 @@ function DashboardContent() {
                 </Paper>
               </Grid>
               {/* Live Accelerometer */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Index />
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+              <Grid item xs={12} md={6} lg={6}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 285}}>
                   <Accelerometer />
                 </Paper>
               </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+              <Grid item xs={12} md={6} lg={6}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 285}}>
                   <Compass />
                 </Paper>
               </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Health />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={4}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Temperature />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={4}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Connection />
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={4} lg={4}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Tester />
+                  <Index />
                 </Paper>
               </Grid>
               <Grid item xs={12}>

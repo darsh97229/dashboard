@@ -21,7 +21,7 @@ class Battery extends Component {
       <React.Fragment>
         <Title>Battery Level</Title>
         <Typography component="p" variant="h4" sx={{ flex: 1 }}>
-          {disp}%
+          {disp/100}%
         </Typography>
         <div>
           <Link color="primary" href="#" onClick={preventDefault}>

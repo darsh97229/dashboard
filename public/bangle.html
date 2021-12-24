@@ -95,7 +95,7 @@ Bangle.on('mag',function(a) {
 var TEMP_CODE = `
   function onTimer() {
     // Get the temperature as a string
-    var t = E.getTemperature().toFixed(1);
+    var t = E.getTemperature()*100;
     // Clear display
     g.clear();
     // Use the small font for a title
@@ -103,7 +103,7 @@ var TEMP_CODE = `
     g.drawString("Temperature:");
     // Use a large font for the value itself
     g.setFontVector(40);
-    g.drawString(t, (g.getWidth()-g.stringWidth(t))/2,10);
+    g.drawString(t/100, (g.getWidth()-g.stringWidth(t))/2,10);
     // Update the screen
     g.flip();
     var d = [
@@ -122,7 +122,7 @@ var TEMP_CODE = `
 var BATTERY_CODE = `
   function onTimer2() {
     // Get the battery values as a string
-    var v = E.getBattery().toFixed(1);
+    var v = E.getBattery()*100;
     Bluetooth.println(v);
     var d = [
     "bat",
@@ -218,10 +218,16 @@ function onLine(line) {
     setBarPos("barMagY", magnetometer.y);
     setBarPos("barMagZ", magnetometer.z);
     setBarPos("barMagAngle", magnetometer.heading);
+
     document.getElementById("dispMagX").innerHTML = magnetometer.x;
     document.getElementById("dispMagY").innerHTML = magnetometer.y;
     document.getElementById("dispMagZ").innerHTML = magnetometer.z;
     document.getElementById("dispMagAngle").innerHTML = magnetometer.heading;
+
+    localStorage.setItem("globalMagX", magnetometer.x);
+    localStorage.setItem("globalMagY", magnetometer.y);
+    localStorage.setItem("globalMagZ", magnetometer.z);
+    localStorage.setItem("globalMagAngle", magnetometer.heading);
   }
   else if (d.length == 5) {
     var accel = {
@@ -234,13 +240,18 @@ function onLine(line) {
     setBarPos("barAccelY", accel.y);
     setBarPos("barAccelZ", accel.z);
     setBarPos("barAccelMag", accel.mag);
+
     document.getElementById("dispAccelX").innerHTML = accel.x;
     document.getElementById("dispAccelY").innerHTML = accel.y;
     document.getElementById("dispAccelZ").innerHTML = accel.z;
     document.getElementById("dispAccelMag").innerHTML = accel.mag;
+
+    localStorage.setItem("globalAccelX", accel.x);
+    localStorage.setItem("globalAccelY", accel.y);
+    localStorage.setItem("globalAccelZ", accel.z);
+    localStorage.setItem("globalAccelMag", accel.mag);
   }
   
-
   date = new Date();
   var tempor = date.getTime();
   document.getElementById("milli").innerHTML = tempor;
