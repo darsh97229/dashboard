@@ -8,25 +8,24 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-class Tester extends Component {
+class Battery extends Component {
   constructor(props){
     super(props);
-    this.state = { time: Date.now() };
-    this.state = { disp: localStorage.getItem("globaltemp") };
+    this.state = { disp: localStorage.getItem("globalBatt") };
   }
   
   render(){
-    var disp = localStorage.getItem("globaltemp");
+    var disp = localStorage.getItem("globalBatt");
 
     return(
       <React.Fragment>
-        <Title>Temperature Data</Title>
+        <Title>Battery Level</Title>
         <Typography component="p" variant="h4" sx={{ flex: 1 }}>
-          {disp} Celsius
+          {disp}%
         </Typography>
         <div>
           <Link color="primary" href="#" onClick={preventDefault}>
-            View Temperature Data
+            View Battery Data
           </Link>
         </div>
       </React.Fragment>
@@ -35,9 +34,9 @@ class Tester extends Component {
   
   componentDidMount() {
     setInterval(() => {
-      this.setState({disp: localStorage.getItem("globaltemp")})
+      this.setState({disp: localStorage.getItem("globalBatt")})
      }, 1000)
   }
 }
 
-export default Tester;
+export default Battery;

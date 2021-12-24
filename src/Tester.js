@@ -16,25 +16,17 @@ class Tester extends Component {
   }
   
   render(){
-    var time = new Date();
     var disp = localStorage.getItem("globaltemp");
 
     return(
       <React.Fragment>
-        <Title>GPS Tracker</Title>
-        <Typography component="p" variant="h4">
-          Current Location
-        </Typography>
-        <Typography color="text.secondary" sx={{ flex: 1 }}>
-
-          as of {time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })} on {(new Date().getMonth()+1)+'/'+(new Date().getDate())+'/'+new Date().getFullYear()}
-        </Typography>
-        <Typography color="text.secondary" sx={{ flex: 1 }}>
-          {disp}
+        <Title>Temperature Data</Title>
+        <Typography component="p" variant="h4" sx={{ flex: 1 }}>
+          {disp} Celsius
         </Typography>
         <div>
           <Link color="primary" href="#" onClick={preventDefault}>
-            View Location Data
+            View Temperature Data
           </Link>
         </div>
       </React.Fragment>
