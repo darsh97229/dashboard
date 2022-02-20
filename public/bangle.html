@@ -7,6 +7,7 @@
 <script src="https://www.puck-js.com/puck.js"></script>
 <button id="btnConnect">Connect to Watch</button>
 <br>
+<button id="btnConnect2">Connect to Watch</button>
 <br>
 <button onclick="connection.write('LED1.set()' + '\n');">Turn LED1 On</button>
 <button onclick="connection.write('LED1.reset()' + '\n');">Turn LED1 Off</button>
@@ -148,6 +149,41 @@ Bangle.on('HRM', function(h) {
  });\n
  `;
 // When we click the connect button...
+
+var connection2;
+document.getElementById("btnConnect2").addEventListener("click", function() {
+  // disconnect if connected already
+  if (connection2) {
+    connection2.close();
+    connection2 = undefined;
+  }
+  // Connect
+  Puck.connect(function(c) {
+    if (!c) {
+      alert("Couldn't connect!");
+      return;
+    }
+    connection2 = c;
+    var buf = "";
+    connection2.on("data", function(d) {
+    buf += d;
+    var l = buf.split("\n");
+    buf = l.pop();
+    l.forEach(onLine);
+    });
+    connection2.write("reset();\n", function() {
+      const d = new Date();
+      setTimeout(function() { connection2.write(ACCEL_CODE);}, 1000);
+      setTimeout(function() { connection2.write(MAG_CODE);}, 1000);
+      setTimeout(function() { connection2.write(TEMP_CODE);}, 1000);
+      setTimeout(function() { connection2.write(BATTERY_CODE);}, 1000);
+      setTimeout(function() { connection2.write(HRM_CODE);}, 1000);
+    });
+  });
+});
+
+
+
 var connection;
 document.getElementById("btnConnect").addEventListener("click", function() {
   // disconnect if connected already
@@ -185,16 +221,21 @@ var tempor = date.getTime();
 var senttime = 0;
 var recievetime = 0;
 var diff = 0;
+var temps = [];
+var i = 0;
 
 function onLine(line) {
   var d = line.split(",");
   if (d[0] == "Bangle.beep(200"){
     recievetime = date.getTime();
   }
-
+  
   if (d.length == 2 && d[0] == "tmp") {
     document.getElementById("temp").innerHTML = parseInt(d[1]).toFixed(1);
     localStorage.setItem("globaltemp", parseInt(d[1]).toFixed(1));
+    temps[i] = parseInt(d[1]).toFixed(1)/100;
+    i+=1;
+    localStorage.setItem("tempdatabase", JSON.stringify(temps));
   }
   else if (d.length == 2 && d[0] == "bat") {
     document.getElementById("bat").innerHTML = parseInt(d[1]).toFixed(1);

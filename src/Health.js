@@ -34,7 +34,7 @@ class Health extends Component {
   constructor(props){
     super(props);
     this.state = { BPM: localStorage.getItem("globalBPM") };
-    this.state = { Accuracy: localStorage.getItem("globalBPM") };
+    this.state = { Accuracy: localStorage.getItem("globalAccuracy") };
   }
   
   render(){
